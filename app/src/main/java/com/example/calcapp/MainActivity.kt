@@ -23,102 +23,103 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         button4.setOnClickListener(this)
 
 
-
-
-
-
-
-        }
-       override fun onClick(v: View?) {
-
-           if (v != null) {
-               if (v.id == R.id.button1) {
-                   plusButton()
-               } else if (v.id == R.id.button2) {
-                   minusButton()
-               } else if (v.id == R.id.button3) {
-                   multiplyButton()
-               } else {
-                   divisionButton()
-               }
-           }
-
     }
 
-    private fun plusButton() {
-        try {
-            val intent = Intent(this, SecondActivity::class.java)
-            val result = editText1.text.toString().toDouble() + editText2.text.toString().toDouble()
-            intent.putExtra("calculation", result)
-            startActivity(intent)
-        } catch (e: Exception ) {
-            button1.setOnClickListener { view ->
-                Snackbar.make(view, "数字を入力してください", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("分かりました") {
-                        Log.d("UI_PARTS", "Snackbarをタップした")
-                    }.show()
+    override fun onClick(v: View?) {
+
+        if (v != null) {
+            if (v.id == R.id.button1) {
+                plusButton(v)
+            } else if (v.id == R.id.button2) {
+                minusButton(v)
+            } else if (v.id == R.id.button3) {
+                multiplyButton(v)
+            } else {
+                divisionButton(v)
             }
 
+
         }
 
     }
 
-    private fun minusButton() {
+
+    fun plusButton(v: View) {
+        try {
+            val intent = Intent(this, SecondActivity::class.java)
+            val result =
+                editText1.text.toString().toDouble() + editText2.text.toString().toDouble()
+            intent.putExtra("calculation", result)
+            startActivity(intent)
+        } catch (e: Exception) {
+            Snackbar.make(v, "数字を入力してください", Snackbar.LENGTH_INDEFINITE)
+                .setAction("分かりました") {
+                    Log.d("UI_PARTS", "Snackbarをタップした")
+                }.show()
+
+        }
+
+
+    }
+
+    private fun minusButton(v: View) {
         try {
             val intent = Intent(this, SecondActivity::class.java)
             val result = editText1.text.toString().toDouble() - editText2.text.toString().toDouble()
             intent.putExtra("calculation", result)
             startActivity(intent)
         } catch (e: Exception) {
-            button2.setOnClickListener { view ->
-                Snackbar.make(view, "数字を入力してください", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("分かりました") {
-                        Log.d("UI_PARTS", "Snackbarをタップした")
-                    }.show()
-            }
+
+            Snackbar.make(v, "数字を入力してください", Snackbar.LENGTH_INDEFINITE)
+                .setAction("分かりました") {
+                    Log.d("UI_PARTS", "Snackbarをタップした")
+                }.show()
         }
     }
 
-    private fun multiplyButton() {
+
+    private fun multiplyButton(v: View) {
         try {
             val intent = Intent(this, SecondActivity::class.java)
             val result = editText1.text.toString().toDouble() * editText2.text.toString().toDouble()
             intent.putExtra("calculation", result)
             startActivity(intent)
         } catch (e: Exception) {
-            button3.setOnClickListener { view ->
-                Snackbar.make(view, "数字を入力してください", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("分かりました") {
-                        Log.d("UI_PARTS", "Snackbarをタップした")
-                    }.show()
-            }
+
+            Snackbar.make(v, "数字を入力してください", Snackbar.LENGTH_INDEFINITE)
+                .setAction("分かりました") {
+                    Log.d("UI_PARTS", "Snackbarをタップした")
+                }.show()
         }
     }
 
-    private fun divisionButton() = try {
-           val intent = Intent(this, SecondActivity::class.java)
-           val result = editText1.text.toString().toDouble() / editText2.text.toString().toDouble()
 
-        if (editText2.text.toString().toDouble() == 0.0) { button4.setOnClickListener { view ->
-            Snackbar.make(view, "0では割れません", Snackbar.LENGTH_INDEFINITE)
+    private fun divisionButton(v: View) = try {
+        val intent = Intent(this, SecondActivity::class.java)
+        val result = editText1.text.toString().toDouble() / editText2.text.toString().toDouble()
+
+        if (editText2.text.toString().toDouble() == 0.0) {
+
+            Snackbar.make(v, "0では割れません", Snackbar.LENGTH_INDEFINITE)
                 .setAction("分かりました") {
                     Log.d("UI_PARTS", "Snackbarをタップした")
-                }.show() }
-        } else { intent.putExtra("calculation", result)
-           startActivity(intent)
-    }}
+                }.show()
+        } else {
+            intent.putExtra("calculation", result)
+            startActivity(intent)
+        }
+    } catch (e: Exception) {
 
-   catch (e: Exception) { button4.setOnClickListener{ view ->
-                   Snackbar.make(view, "数字を入力してください", Snackbar.LENGTH_INDEFINITE)
-                       .setAction("分かりました") {
-                           Log.d("UI_PARTS", "Snackbarをタップした")
-                       }.show()
-           }
+        Snackbar.make(v, "数字を入力してください", Snackbar.LENGTH_INDEFINITE)
+            .setAction("分かりました") {
+                Log.d("UI_PARTS", "Snackbarをタップした")
+            }.show()
+    }
 
-           }
+}
 
 
-   }
+
 
 
 
